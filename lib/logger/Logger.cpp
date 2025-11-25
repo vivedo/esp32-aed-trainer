@@ -5,7 +5,8 @@
 #include <stdarg.h>
 #include <string.h>
 
-Logger::Logger() {}
+Logger::Logger() {
+}
 
 void Logger::begin(Print &out, LogLevel level) {
     log_print_ptr = &out;
@@ -15,7 +16,9 @@ void Logger::begin(Print &out, LogLevel level) {
     }
 }
 
-void Logger::setLogLevel(LogLevel level) { log_level = level; }
+void Logger::setLogLevel(LogLevel level) {
+    log_level = level;
+}
 
 bool Logger::isLogging(LogLevel levelCheck) const {
     return log_print_ptr != nullptr && static_cast<int>(levelCheck) >= static_cast<int>(log_level);
@@ -34,7 +37,9 @@ void Logger::println() {
     print_buffer[0] = 0;
 }
 
-char *Logger::str() { return print_buffer; }
+char *Logger::str() {
+    return print_buffer;
+}
 
 Logger &Logger::instance() {
     static Logger *ptr = nullptr;
@@ -45,7 +50,9 @@ Logger &Logger::instance() {
     return *ptr;
 }
 
-Logger::LogLevel Logger::level() const { return log_level; }
+Logger::LogLevel Logger::level() const {
+    return log_level;
+}
 
 void Logger::safePrint(const char *fmt, ...) {
     if (!mutex) return;

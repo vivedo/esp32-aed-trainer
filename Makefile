@@ -1,3 +1,10 @@
+CLANG_FORMAT := clang-format --verbose
+
 .PHONY: format
+
 format:
-	clang-format --verbose -i **/*.cpp **/*.h
+	@find src \( -name "*.cpp" -o -name "*.h" \) -exec $(CLANG_FORMAT) -i {} +
+	@echo
+	@find lib \( -name "*.cpp" -o -name "*.h" \) -exec $(CLANG_FORMAT) -i {} +
+	@echo
+	@find test \( -name "*.cpp" -o -name "*.h" \) -exec $(CLANG_FORMAT) -i {} +

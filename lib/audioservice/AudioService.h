@@ -1,5 +1,7 @@
 #pragma once
 
+namespace AudioService {
+
 enum class AudioTracks {
     CONNECT_PADS,
     RYTHM_ANALYSIS_IN_PROGRESS,
@@ -8,5 +10,7 @@ enum class AudioTracks {
     SHOCK_NOT_ADVISED
 };
 
-void AudioService_Start();
+void Start();
 void QueueTrack(AudioTracks track);
+
+}  // namespace AudioService

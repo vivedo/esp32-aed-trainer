@@ -4,10 +4,11 @@
 #include <AudioTools/AudioCodecs/CodecMP3Helix.h>
 #include <AudioTools/AudioLibs/AudioBoardStream.h>
 #include <AudioTools/Disk/AudioSourceSD.h>
+#include <Logger.h>
 #include <freertos/FreeRTOS.h>
 #include <freertos/queue.h>
 
-#include "Logger.h"
+namespace AudioService {
 
 static const char* startFilePath = "/";
 static const char* ext = "mp3";
@@ -25,9 +26,9 @@ static const char* AUDIO_FILE_SHOCK_NOT_ADVISED = "shock_not_advised.mp3";
 
 static QueueHandle_t trackQueue = nullptr;
 
-static void AudioService_Task(void*);
+static void Task(void*);
 
-void AudioService_Start() {
+void Start() {
     trackQueue = xQueueCreate(10, sizeof(AudioTracks));
 
     AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Warning);
@@ -44,10 +45,10 @@ void AudioService_Start() {
     player.setAutoNext(false);
     player.begin();
 
-    xTaskCreatePinnedToCore(AudioService_Task, "AudioService", 10000, NULL, 1, NULL, 1);
+    xTaskCreatePinnedToCore(Task, "AudioService", 10000, NULL, 1, NULL, 1);
 }
 
-static void AudioService_Task(void*) {
+static void Task(void*) {
     LOG_D("Audio Service started");
 
     AudioTracks track;
@@ -77,4 +78,8 @@ static void AudioService_Task(void*) {
     }
 }
 
-void QueueTrack(AudioTracks track) { xQueueSend(trackQueue, &track, 0); }
+void QueueTrack(AudioTracks track) {
+    xQueueSend(trackQueue, &track, 0);
+}
+
+}  // namespace AudioService

@@ -2,8 +2,10 @@
 
 #include <WiFi.h>
 
+namespace Network {
 extern IPAddress localIP;
 extern IPAddress gateway;
 extern IPAddress subnet;
 
-void WiFiAP_Start();
+void StartWiFiAP();
+}  // namespace Network
