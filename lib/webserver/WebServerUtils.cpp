@@ -15,7 +15,8 @@ HttpRequest ParseRequest(const String& request) {
 
     if (qMark) {
         size_t pathLen = qMark - fullPath;
-        if (pathLen > sizeof(req.path) - 1) pathLen = sizeof(req.path) - 1;
+        if (pathLen > sizeof(req.path) - 1)
+            pathLen = sizeof(req.path) - 1;
         strncpy(req.path, fullPath, pathLen);
         req.path[pathLen] = 0;
 
@@ -35,7 +36,8 @@ HttpRequest ParseRequest(const String& request) {
 // Parse a query string like "foo=1&bar=2" into a map
 std::map<String, String> ParseQuery(const char* query) {
     std::map<String, String> params;
-    if (!query) return params;
+    if (!query)
+        return params;
 
     char buffer[256];
     strncpy(buffer, query, sizeof(buffer) - 1);

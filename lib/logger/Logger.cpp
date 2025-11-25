@@ -5,8 +5,7 @@
 #include <stdarg.h>
 #include <string.h>
 
-Logger::Logger() {
-}
+Logger::Logger() {}
 
 void Logger::begin(Print &out, LogLevel level) {
     log_print_ptr = &out;
@@ -55,7 +54,8 @@ Logger::LogLevel Logger::level() const {
 }
 
 void Logger::safePrint(const char *fmt, ...) {
-    if (!mutex) return;
+    if (!mutex)
+        return;
 
     if (xSemaphoreTake(mutex, portMAX_DELAY) == pdTRUE) {
         va_list args;
@@ -81,7 +81,8 @@ const char *Logger::levelName(LogLevel level) const {
 }
 
 void Logger::printPrefix(const char *file, int line, LogLevel current_level) const {
-    if (!log_print_ptr) return;
+    if (!log_print_ptr)
+        return;
 
     const char *file_name = strrchr(file, '/') ? strrchr(file, '/') + 1 : file;
     const char *level_code = levelName(current_level);

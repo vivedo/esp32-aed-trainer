@@ -15,5 +15,4 @@ void setup() {
     WebServer::Start();
 }
 
-void loop() {
-}
+void loop() {}
