@@ -1,13 +1,13 @@
 #include <Arduino.h>
-#include <Logger.h>
-#include <Network.h>
-#include <WebServer.h>
-#include <AudioService.h>
 
-void setup()
-{
+#include "AudioService.h"
+#include "Logger.h"
+#include "Network.h"
+#include "WebServer.h"
+
+void setup() {
     Serial.begin(115200);
-    LoggerNS::GlobalLogger.setLogLevel(LoggerNS::Logger::LogLevel::Debug);
+    GlobalLogger.setLogLevel(Logger::LogLevel::Debug);
 
     WiFiAP_Start();
 

@@ -1,11 +1,12 @@
-#include <Network.h>
+#include "Network.h"
+
+#include "Logger.h"
 
 IPAddress localIP(192, 168, 100, 1);
 IPAddress gateway(192, 168, 100, 1);
 IPAddress subnet(255, 255, 255, 0);
 
-void WiFiAP_Start()
-{
+void WiFiAP_Start() {
     uint8_t mac[6];
     WiFi.macAddress(mac);
     char ssid[32];
@@ -13,8 +14,7 @@ void WiFiAP_Start()
 
     WiFi.softAP(ssid, NULL);
 
-    if (!WiFi.softAPConfig(localIP, gateway, subnet))
-    {
+    if (!WiFi.softAPConfig(localIP, gateway, subnet)) {
         Serial.println("Failed to configure AP IP");
     }
 
