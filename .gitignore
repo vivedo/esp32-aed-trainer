@@ -4,3 +4,6 @@
 .vscode/launch.json
 .vscode/ipch
 .data
+data/**/*.opus
+audio/*
+!audio/.gitkeep
